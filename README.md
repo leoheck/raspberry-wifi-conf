@@ -1,3 +1,4 @@
+
 # raspberry-wifi-conf
 
 A Node application which makes connecting your RaspberryPi to your home wifi easier.
@@ -27,7 +28,7 @@ If you do not have `bower` installed already, you can install it globally by run
 ## Install
 
 ```sh
-$git clone https://github.com/sabhiram/raspberry-wifi-conf.git
+$git clone https://github.com/leoheck/raspberry-wifi-conf.git
 $cd raspberry-wifi-conf
 $npm update
 $bower install
@@ -38,7 +39,7 @@ $sudo npm start
 
 ## Setup the app as a service
 
-There is a startup script included to make the server starting and stopping easier. Do remember that the application is assumed to be installed under `/home/pi/raspberry-wifi-conf`. Feel free to change this in the `assets/init.d/raspberry-wifi-conf` file.
+There is a startup script included to make the server starting and stopping easier. Do remember that the application is assumed to be installed under `/raspberry-wifi-conf`. Feel free to change this in the `assets/init.d/raspberry-wifi-conf` file.
 
 ```sh
 $sudo cp assets/init.d/raspberry-wifi-conf /etc/init.d/raspberry-wifi-conf 
@@ -73,6 +74,8 @@ Latest versions of raspbian use dhcpcd to manage network interfaces, since we ar
 
 TODO: Handle this automatically.
 
+
+
 ## Usage
 
 This is approximately what occurs when we run this app:
@@ -86,14 +89,14 @@ This is approximately what occurs when we run this app:
 
 Typically, I have the following line in my `/etc/rc.local` file:
 ```
-cd /home/pi/raspberry-wifi-conf
+cd /raspberry-wifi-conf
 sudo /usr/bin/node server.js
 ```
 
 Note that this is run in a blocking fashion, in that this script will have to exit before we can proceed with others defined in `rc.local`. This way I can guarantee that other services which might rely on wifi will have said connection before being run. If this is not the case for you, and you just want this to run (if needed) in the background, then you can do:
 
 ```
-cd /home/pi/raspberry-wifi-conf
+cd /raspberry-wifi-conf
 sudo /usr/bin/node server.js < /dev/null &
 ```
 
