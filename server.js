@@ -30,15 +30,15 @@ var async               = require("async"),
 async.series([
 
 
-    function leds_ap_mode(next_step) {
+    function leds_ap_mode() {
         wifi_led.writeSync(0);
         ap_led.writeSync(1);
-    }
+    },
 
-    function leds_wifi_mode(next_step) {
+    function leds_wifi_mode() {
         ap_led.writeSync(0);
         wifi_led.writeSync(1);
-    }
+    },
 
     // 1. Check if we have the required dependencies installed
 
