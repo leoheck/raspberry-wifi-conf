@@ -45,6 +45,8 @@ case "$1" in
         if [ -f $server_pid ]; then
             echo "PID: $server_pid"
             ps aux | grep $server_pid
+        else
+            echo "raspberry-wifi-conf is not running."
         fi
         ;;
 
