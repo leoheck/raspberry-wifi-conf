@@ -42,7 +42,6 @@ case "$1" in
         ;;
 
     status)
-        echo "Needs to be implemented..."
         if [ -f $server_pid ]; then
             echo "PID: $server_pid"
             ps aux | grep $server_pid
