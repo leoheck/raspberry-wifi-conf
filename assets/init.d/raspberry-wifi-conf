@@ -15,13 +15,13 @@
 case "$1" in
   start)
     echo "Starting raspberry-wifi-conf service"
-    cd /home/pi/raspberry-wifi-conf
+    cd /raspberry-wifi-conf
     sudo /usr/bin/node server.js &
     echo $! > node.pid
     ;;
   stop)
     echo "Stopping raspberry-wifi-conf service"
-    PIDFile=/home/pi/raspberry-wifi-conf/node.pid
+    PIDFile=/raspberry-wifi-conf/node.pid
     if [ -f $PIDFile ]; then
         sudo kill -9 $(cat $PIDFile)
         sudo kill -9 $(($(cat $PIDFile) + 1))

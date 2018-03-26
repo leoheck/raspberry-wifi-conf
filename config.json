@@ -5,8 +5,8 @@
     "access_point": {
         "force_reconfigure": true,
         "wifi_interface":    "wlan0",
-        "ssid":              "homebase",
-        "passphrase":        "12345678",
+        "ssid":              "BirdCall",
+        "passphrase":        "homebase",
         "domain":            "rpi.config",
         "ip_addr":           "192.168.44.1",
         "netmask":           "255.255.255.0",
