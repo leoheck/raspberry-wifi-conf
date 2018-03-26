@@ -11,35 +11,47 @@
 # Description:       A NodeJS application to ensure Wifi connectivity by setting the RPI as an AP if needed
 ### END INIT INFO
 
+# Add path to node
+PATH=/usr/local/bin/node:$PATH
+
+tool_path="/raspberry-wifi-conf"
+server_pid="/raspberry-wifi-conf/node.pid"
+
 # Carry out specific functions when asked to by the system
 case "$1" in
 
-  start)
-    echo "Starting raspberry-wifi-conf service"
-    cd /raspberry-wifi-conf
-    sudo /usr/local/bin/node server.js &
-    echo $! > node.pid
-    ;;
+    start)
+        if [ ! -f $server_pid ]; then
+            echo "Starting raspberry-wifi-conf service"
+            cd $tool_path
+            sudo node server.js &
+            echo $! > node.pid
+        else
+            echo "Server is already running. PID is $server_pid"
+        fi
+        ;;
 
-  stop)
-    echo "Stopping raspberry-wifi-conf service"
-    PIDFile=/raspberry-wifi-conf/node.pid
-    if [ -f $PIDFile ]; then
-	sudo killall node # lheck workaround
-        sudo kill -9 $(cat $PIDFile)
-        sudo kill -9 $(($(cat $PIDFile) + 1))
-        sudo rm $PIDFile
-    fi
-    ;;
+    stop)
+        server_pid=/raspberry-wifi-conf/node.pid
+        if [ -f $server_pid ]; then
+            sudo kill -9 $(cat $server_pid)
+            sudo kill -9 $(($(cat $server_pid) + 1))
+            sudo rm $server_pid
+            #sudo killall node # lheck workaround
+        fi
+        ;;
 
-  status)
-    echo "Needs to be implemented..."
-    ;;
+    status)
+        echo "Needs to be implemented..."
+        if [ -f $server_pid ];
+            echo "PID: $server_pid"
+            ps aux | grep $server_pid
+        ;;
 
-  *)
-    echo "Usage: /etc/init.d/raspberry-wifi-conf {start|stop}"
-    exit 1
-    ;;
+    *)
+        echo "Usage: /etc/init.d/raspberry-wifi-conf {start|stop|status}"
+        exit 1
+        ;;
 esac
 
 exit 0
