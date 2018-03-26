@@ -32,7 +32,6 @@ case "$1" in
         ;;
 
     stop)
-        server_pid=/raspberry-wifi-conf/node.pid
         if [ -f $server_pid ]; then
             sudo kill -9 $(cat $server_pid)
             sudo kill -9 $(($(cat $server_pid) + 1))
@@ -43,7 +42,7 @@ case "$1" in
 
     status)
         if [ -f $server_pid ]; then
-            echo "PID: $server_pid"
+            echo "PID: $(cat $server_pid)"
             ps aux | grep $server_pid
         else
             echo "raspberry-wifi-conf is not running."
