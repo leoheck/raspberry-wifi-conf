@@ -15,28 +15,30 @@
 PATH=/usr/local/bin/node:$PATH
 
 tool_path="/raspberry-wifi-conf"
-server_pid="/raspberry-wifi-conf/node.pid"
+server_pid_file="/raspberry-wifi-conf/node.pid"
 
 # Carry out specific functions when asked to by the system
 case "$1" in
 
     start)
-        if [ ! -f $server_pid ]; then
-            echo "Starting raspberry-wifi-conf service"
+        if [ ! -f $server_pid_file ]; then
+            echo "Starting raspberry-wifi-conf service..."
             cd $tool_path
             sudo node server.js &
             echo $! > node.pid
         else
-            echo "Server is already running. PID is $server_pid"
+            echo "Server is already running. PID is $pid"
         fi
         ;;
 
     stop)
-        if [ -f $server_pid ]; then
-            sudo kill -9 $(cat $server_pid)
-            sudo kill -9 $(($(cat $server_pid) + 1)) #why this?
-            sudo rm $server_pid
-            sudo killall node # lheck workaround
+        if [ -f $server_pid_file ]; then
+            echo "Stopping raspberry-wifi-conf service..."
+            pid=$(cat $server_pid_file)
+            sudo kill -9 $pid
+            sudo kill -9 $($pid + 1)) # why this?
+            sudo rm $server_pid_file
+            # sudo killall node # lheck workaround
         fi
         ;;
 
@@ -47,16 +49,17 @@ case "$1" in
         ;;
 
     status)
-        if [ -f $server_pid ]; then
-            echo "PID: $(cat $server_pid)"
-            ps aux | grep $server_pid
+        if [ -f $server_pid_file ]; then
+            pid=$(cat $server_pid_file)
+            echo "PID: $pid"
+            sudo ps aux | grep $pid
         else
             echo "raspberry-wifi-conf is not running."
         fi
         ;;
 
     *)
-        echo "Usage: /etc/init.d/raspberry-wifi-conf {start|stop|status}"
+        echo "Usage: /etc/init.d/raspberry-wifi-conf {start|stop|restart|status}"
         exit 1
         ;;
 esac
