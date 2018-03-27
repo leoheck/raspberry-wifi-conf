@@ -36,7 +36,7 @@ case "$1" in
             echo "Stopping raspberry-wifi-conf service..."
             pid=$(cat $server_pid_file)
             sudo kill -9 $pid
-            sudo kill -9 $($pid + 1)) # why this?
+            sudo kill -9 $((pid + 1)) # why this?
             sudo rm $server_pid_file
             # sudo killall node # lheck workaround
         fi
