@@ -34,10 +34,16 @@ case "$1" in
     stop)
         if [ -f $server_pid ]; then
             sudo kill -9 $(cat $server_pid)
-            sudo kill -9 $(($(cat $server_pid) + 1))
+            sudo kill -9 $(($(cat $server_pid) + 1)) #why this?
             sudo rm $server_pid
-            #sudo killall node # lheck workaround
+            sudo killall node # lheck workaround
         fi
+        ;;
+
+    restart)
+        /etc/init.d/raspberry-wifi-conf stop
+        sleep 1
+        /etc/init.d/raspberry-wifi-conf start
         ;;
 
     status)
