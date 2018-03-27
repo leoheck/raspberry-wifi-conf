@@ -60,8 +60,8 @@ async.series([
             if (result_ip) {
 
                 // leds_wifi_mode();
-                wifi_led.writeSync(1);
-                ap_led.writeSync(0);
+                // wifi_led.writeSync(1);
+                // ap_led.writeSync(0);
 
                 console.log("\nWifi is enabled, and IP " + result_ip + " assigned");
                 var reconfigure = config.access_point.force_reconfigure || false;
@@ -86,8 +86,8 @@ async.series([
             } else {
                 console.log("... AP Enable Success!");
 
-                wifi_led.writeSync(0);
-                ap_led.writeSync(1);
+                // wifi_led.writeSync(0);
+                // ap_led.writeSync(1);
 
             }
             next_step(error);
