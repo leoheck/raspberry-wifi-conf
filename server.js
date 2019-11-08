@@ -76,7 +76,7 @@ async.series([
             next_step(error);
         });
     },
-    
+
     // 3. Turn RPI into an access point
 
     function enable_rpi_ap(next_step) {
@@ -103,7 +103,7 @@ async.series([
         console.log("\nHTTP server running...");
         require("./app/api.js")(wifi_manager, next_step);
     },
-    
+
 
 ], function(error) {
     if (error) {
