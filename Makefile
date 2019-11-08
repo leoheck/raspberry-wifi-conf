@@ -6,9 +6,11 @@ install_updates:
 	sudo -H npm update
 	sudo bower install
 	sudo npm run-script provision
-	sudo npm start
+	#sudo npm start
 
 install:
 	sudo cp assets/init.d/raspberry-wifi-conf /etc/init.d/raspberry-wifi-conf
-	sudo chmod +x /etc/init.d/raspberry-wifi-conf
-	sudo update-rc.d raspberry-wifi-conf defaults
+	sudo cp assets/systemd/system/wificonf.service /etc/systemd/system/
+	sudo systemctl enable wificonf.service
+	sudo systemtcl daemon-reload
+	sudo sytemtcl restart wificonf.service

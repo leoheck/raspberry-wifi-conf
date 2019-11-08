@@ -1,0 +1,11 @@
+[Unit]
+Description = Wifi setup
+
+[Service]
+Type = simple
+ExecStart = node server.js
+Restart = always
+RestartSec = 5
+
+[Install]
+WantedBy = sysinit.target
