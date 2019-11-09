@@ -1,11 +1,8 @@
 
-var Gpio = require('onoff').Gpio; //include onoff to interact with the GPIO
-
+var Gpio = require('onoff').Gpio;
 var ap_led = new Gpio(17, 'out'); //use GPIO pin 4, and specify that it is output
 var wifi_led = new Gpio(27, 'out'); //use GPIO pin 4, and specify that it is output
-// var rst_wifi_btn = new Gpio(23, 'in', 'both');
-// var btn2 = new Gpio(24, 'in', 'both');
-
+var rst_wifi_btn = new Gpio(23, 'in', 'both');
 
 var async               = require("async"),
     wifi_manager        = require("./app/wifi_manager")(),
@@ -29,7 +26,6 @@ var async               = require("async"),
 */
 
 async.series([
-
 
     // function leds_ap_mode() {
     //     wifi_led.writeSync(0);
@@ -103,7 +99,6 @@ async.series([
         console.log("\nHTTP server running...");
         require("./app/api.js")(wifi_manager, next_step);
     },
-
 
 ], function(error) {
     if (error) {

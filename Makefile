@@ -4,7 +4,9 @@ install_updates:
 	sudo apt install nodejs
 	sudo apt install dnsmasq
 	sudo apt install hostapd
+	sudo apt install fonts-font-awesome
 	sudo -H npm update
+	sudo npm install bower -g
 	sudo bower install
 	sudo npm run-script provision
 
