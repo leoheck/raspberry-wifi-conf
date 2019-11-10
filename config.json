@@ -5,7 +5,7 @@
     "access_point": {
         "force_reconfigure":  false,
         "wifi_interface":     "wlan0",
-        "ssid":               "homebase",
+        "ssid":               "Homebase",
         "passphrase":         "homebase",
         "domain":             "rpi.config",
         "ip_addr":            "192.168.88.1",
