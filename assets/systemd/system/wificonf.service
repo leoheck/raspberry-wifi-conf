@@ -3,7 +3,7 @@ Description = Wifi setup
 
 [Service]
 Type = simple
-ExecStart = node server.js
+ExecStart = /usr/local/bin/wificonfig
 Restart = always
 RestartSec = 5
 
