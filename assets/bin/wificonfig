@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /home/pi/raspberry-wifi-conf
+/usr/bin/node server.js < /dev/null &
